@@ -19,7 +19,7 @@ Provide working source code that will:
 * Build Tool: Maven 
 ## Implementation
 This design of application includes service “CalculationServiceImpl ” , In memory database layer interfaces StockRepostory  and TradeRepository 
-and model - Stock and Trade.In-memory cache to keep database in cache .Followed Test Driven development  approach to test each operation and edge cases .
+and model - Stock and Trade.In-memory cache to keep data in cache .Followed Test Driven development  approach to test each operation and edge cases .
 
 ##### Assumption 
 * To calculate “P/E Ratio”  assuming last dividend as dividend and dividend should be positive value.
