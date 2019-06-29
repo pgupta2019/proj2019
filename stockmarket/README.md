@@ -24,7 +24,7 @@ and model - Stock and Trade.In-memory cache to keep database in cache .Followed 
 ##### Assumption 
 * To calculate “P/E Ratio”  assuming last dividend as dividend and dividend should be positive value.
 * To calculate Volume weighted stock price for trades in past 15 minutes assuming minutes are configurable .
-* Assuming all the data would be available for available stock. 
+* Assuming all the data would be available if stock is present. 
 
 ##### Package Structure 
 * Model classes -com.jpm.stockmarket.model
