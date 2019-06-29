@@ -51,7 +51,7 @@ public class CalculationServiceImpl implements CalculationService {
 		Optional.ofNullable(symbol).orElseThrow(() -> new GBCEServiceException("stock symbol cannot be null"));
 		Optional.ofNullable(price).orElseThrow(() -> new GBCEServiceException("price cannot be null"));
 
-		// get the stocks details from database. ASSUMPTION - if stock is found all the data would be available
+		// getting the stocks details from database. ASSUMPTION - if stock is found all the data would be available
 		// validations to ensure code is 100% reliable
 		Stock selectedStock = stockRepo.getStockBySymbol(symbol).orElseThrow(() -> new GBCEServiceException("no stocks found for the given symbol=" + symbol));
 
