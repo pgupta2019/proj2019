@@ -38,4 +38,4 @@ To compile and run test with below command
 * mvn clean install -To compile the project 
 * mvn test - To execute unit tests.
 
-Or if using eclipse add lumbok plugin to avoid compilation error and use goal clean install .
+Or if using eclipse add lumbok plugin to avoid compilation error and use maven goal clean install .
