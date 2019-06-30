@@ -1,6 +1,7 @@
 package com.jpm.stockmarket.repository.impl;
 
 import com.jpm.stockmarket.exception.GBCEServiceException;
+import com.jpm.stockmarket.model.Stock;
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -38,6 +39,6 @@ public class StockRepositoryImplTest {
 	@Test(expected = GBCEServiceException.class)
 	public void getStockBySymbol_failure() throws GBCEServiceException {
 		underTest.getStockBySymbol("test");
-
+		
 	}
 }

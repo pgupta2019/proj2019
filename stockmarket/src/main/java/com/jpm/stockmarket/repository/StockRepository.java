@@ -1,10 +1,11 @@
 package com.jpm.stockmarket.repository;
 
-import com.jpm.stockmarket.exception.GBCEServiceException;
-import com.jpm.stockmarket.repository.impl.Stock;
+import java.util.Optional;
+
 import org.springframework.stereotype.Repository;
 
-import java.util.Optional;
+import com.jpm.stockmarket.exception.GBCEServiceException;
+import com.jpm.stockmarket.model.Stock;
 
 @Repository
 public interface StockRepository {

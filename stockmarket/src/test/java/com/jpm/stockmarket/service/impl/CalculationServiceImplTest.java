@@ -1,11 +1,16 @@
 package com.jpm.stockmarket.service.impl;
 
-import com.jpm.stockmarket.exception.GBCEServiceException;
-import com.jpm.stockmarket.model.Trade;
-import com.jpm.stockmarket.model.TradeIndicator;
-import com.jpm.stockmarket.repository.StockRepository;
-import com.jpm.stockmarket.repository.TradeRepository;
-import com.jpm.stockmarket.repository.impl.Stock;
+import static org.junit.Assert.assertThat;
+import static org.mockito.ArgumentMatchers.any;
+import static org.mockito.Mockito.mock;
+import static org.mockito.Mockito.when;
+
+import java.math.BigDecimal;
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+import java.util.Optional;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -13,15 +18,16 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigDecimal;
-import java.util.*;
-
-import static org.junit.Assert.assertThat;
-import static org.mockito.Mockito.*;
+import com.jpm.stockmarket.exception.GBCEServiceException;
+import com.jpm.stockmarket.model.Stock;
+import com.jpm.stockmarket.model.Trade;
+import com.jpm.stockmarket.model.TradeIndicator;
+import com.jpm.stockmarket.repository.StockRepository;
+import com.jpm.stockmarket.repository.TradeRepository;
 
 @RunWith(SpringRunner.class)
-@ContextConfiguration(classes = CalculatorServiceImplTest.class)
-public class CalculatorServiceImplTest {
+@ContextConfiguration(classes = CalculationServiceImplTest.class)
+public class CalculationServiceImplTest {
 
     private CalculationServiceImpl underTest = null;
     private StockRepository mockedStockRepository = null;

@@ -1,9 +1,12 @@
 package com.jpm.stockmarket.repository.impl;
 
-import com.google.common.cache.LoadingCache;
-import com.jpm.stockmarket.exception.GBCEServiceException;
-import com.jpm.stockmarket.model.Trade;
-import com.jpm.stockmarket.model.TradeIndicator;
+import static org.junit.Assert.assertThat;
+
+import java.math.BigDecimal;
+import java.time.LocalDateTime;
+import java.util.List;
+import java.util.concurrent.ExecutionException;
+
 import org.hamcrest.CoreMatchers;
 import org.junit.Before;
 import org.junit.Test;
@@ -11,12 +14,10 @@ import org.junit.runner.RunWith;
 import org.springframework.test.context.ContextConfiguration;
 import org.springframework.test.context.junit4.SpringRunner;
 
-import java.math.BigDecimal;
-import java.time.LocalDateTime;
-import java.util.List;
-import java.util.concurrent.ExecutionException;
-
-import static org.junit.Assert.assertThat;
+import com.google.common.cache.LoadingCache;
+import com.jpm.stockmarket.exception.GBCEServiceException;
+import com.jpm.stockmarket.model.Trade;
+import com.jpm.stockmarket.model.TradeIndicator;
 
 @RunWith(SpringRunner.class)
 @ContextConfiguration(classes = TradeRepositoryImplTest.class)
@@ -60,6 +61,7 @@ public class TradeRepositoryImplTest {
         b = underTest.recordTrade(trade);
         assertThat(b, CoreMatchers.notNullValue());
 
+
         LoadingCache<String, List<Trade>> inMemoryTradeCache = underTest.getInMemoryTradeCache();
         assertThat(inMemoryTradeCache.get("test"), CoreMatchers.notNullValue());
         assertThat(inMemoryTradeCache.get("test").size(), CoreMatchers.is(2));
@@ -69,7 +71,6 @@ public class TradeRepositoryImplTest {
 
     @Test
     public void getLatestTrades_success() throws InterruptedException, GBCEServiceException {
-    	
         Trade trade = new Trade();
         trade.setIndicator(TradeIndicator.BUY);
         trade.setShareQuantity(1);
@@ -86,13 +87,13 @@ public class TradeRepositoryImplTest {
         Thread.sleep(TradeRepositoryImpl.inMemoryExpirationValue * 2);
         List<Trade> responses = underTest.getLatestTrades("test-eviction");
         assertThat(responses, CoreMatchers.notNullValue());
-        assertThat(responses.size(), CoreMatchers.is(2));
+        assertThat(responses.size(), CoreMatchers.is(0));
 
     }
-    @Test
-    public void getLatestTrades_no_data() throws GBCEServiceException {
-        List<Trade> response=underTest.getLatestTrades("test");
-        assertThat(response.size(), CoreMatchers.is(0));
+
+    @Test(expected = GBCEServiceException.class)
+    public void getLatestTrades_failure() throws GBCEServiceException {
+        new TradeRepositoryImpl().getLatestTrades("test");
     }
 
     @Test
@@ -159,16 +160,8 @@ public class TradeRepositoryImplTest {
 
         List<Trade> allStockTrades = underTest.getTradesForAllStocks();
         assertThat(allStockTrades.size(), CoreMatchers.is(2));
-        assertThat(allStockTrades.get(0).getStockSymbol(), CoreMatchers.is(trade2.getStockSymbol()));
-        assertThat(allStockTrades.get(1).getStockSymbol(), CoreMatchers.is(trade1.getStockSymbol()));
+        assertThat(allStockTrades.get(0).getStockSymbol(), CoreMatchers.is(trade1.getStockSymbol()));
+        assertThat(allStockTrades.get(1).getStockSymbol(), CoreMatchers.is(trade2.getStockSymbol()));
     }
-
-    @Test
-    public void getAllTades_noData() {
-
-        List<Trade> allStockTrades = underTest.getTradesForAllStocks();
-        assertThat(allStockTrades.size(), CoreMatchers.is(0));
-    }
-
 
 }

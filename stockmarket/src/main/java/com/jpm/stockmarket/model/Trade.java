@@ -22,6 +22,8 @@ public class Trade {
 	private TradeIndicator indicator;
 	@Getter @Setter
 	private BigDecimal tradePrice;
+	@Getter @Setter
+	private boolean isEvicted;
 	
 	
 	public Trade(String stockSymbol, LocalDateTime timeStamp, long shareQuantity, TradeIndicator indicator,
@@ -34,12 +36,10 @@ public class Trade {
 		this.tradePrice = tradePrice;
 	}
 
-
 	public Trade() {
 		super();
 		// TODO Auto-generated constructor stub
 	}
-
 	
 
 	

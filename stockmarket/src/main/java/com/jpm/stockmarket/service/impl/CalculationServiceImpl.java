@@ -1,19 +1,20 @@
 package com.jpm.stockmarket.service.impl;
 
-import com.jpm.stockmarket.exception.GBCEServiceException;
-import com.jpm.stockmarket.model.Trade;
-import com.jpm.stockmarket.repository.StockRepository;
-import com.jpm.stockmarket.repository.TradeRepository;
-import com.jpm.stockmarket.repository.impl.Stock;
-import com.jpm.stockmarket.service.CalculationService;
-import lombok.extern.slf4j.Slf4j;
-import org.springframework.beans.factory.annotation.Autowired;
-
 import java.math.BigDecimal;
 import java.math.BigInteger;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
+
+import com.jpm.stockmarket.exception.GBCEServiceException;
+import com.jpm.stockmarket.model.Stock;
+import com.jpm.stockmarket.model.Trade;
+import com.jpm.stockmarket.repository.StockRepository;
+import com.jpm.stockmarket.repository.TradeRepository;
+import com.jpm.stockmarket.service.CalculationService;
+
+import lombok.extern.slf4j.Slf4j;
 
 
 /**
@@ -51,7 +52,8 @@ public class CalculationServiceImpl implements CalculationService {
 		Optional.ofNullable(symbol).orElseThrow(() -> new GBCEServiceException("stock symbol cannot be null"));
 		Optional.ofNullable(price).orElseThrow(() -> new GBCEServiceException("price cannot be null"));
 
-		// getting the stocks details from database. ASSUMPTION - if stock is found all the data would be available
+		// getting the stocks details from database. 
+		//ASSUMPTION - if stock is found all the data would be available
 		// validations to ensure code is 100% reliable
 		Stock selectedStock = stockRepo.getStockBySymbol(symbol).orElseThrow(() -> new GBCEServiceException("no stocks found for the given symbol=" + symbol));
 
